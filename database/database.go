@@ -56,18 +56,93 @@ func (db *DB) GetJob(id string) *model.JobListing {
 }
 
 func (db *DB) GetJobs() []*model.JobListing {
+	jobCollection := db.client.Database("graphql-job-board").Collection("job")
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+
 	var jobListings []*model.JobListing
+	cursor, err := jobCollection.Find(ctx, bson.D{})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if err := cursor.All(context.TODO(), &jobListings); err != nil {
+		panic(err)
+	}
 	return jobListings
 }
 
-func (db *DB) CreateJobListing(input model.CreateJobListingInput) *model.JobListing {
-	return &model.JobListing{}
+func (db *DB) CreateJobListing(jobInfo model.CreateJobListingInput) *model.JobListing {
+	jobCollection := db.client.Database("graphql-job-board").Collection("job")
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+
+	inserted, err := jobCollection.InsertOne(ctx, bson.M{
+		"title":       jobInfo.Title,
+		"description": jobInfo.Description,
+		"url":         jobInfo.URL,
+		"company":     jobInfo.Company,
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	insertedID := inserted.InsertedID.(primitive.ObjectID).Hex()
+	returnJobListing := model.JobListing{
+		ID:          insertedID,
+		Title:       jobInfo.Title,
+		Company:     jobInfo.Company,
+		Description: jobInfo.Description,
+		URL:         jobInfo.URL,
+	}
+
+	return &returnJobListing
 }
 
-func (db *DB) UpdateJobListing(jobID string, input model.UpdateJobListingInput) *model.JobListing {
-	return &model.JobListing{}
+func (db *DB) UpdateJobListing(jobID string, jobInfo model.UpdateJobListingInput) *model.JobListing {
+	jobCollection := db.client.Database("graphql-job-board").Collection("job")
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+
+	updateJobListing := bson.M{}
+	if jobInfo.Title != nil {
+		updateJobListing["title"] = jobInfo.Title
+	}
+
+	if jobInfo.Description != nil {
+		updateJobListing["description"] = jobInfo.Description
+	}
+
+	if jobInfo.URL != nil {
+		updateJobListing["url"] = jobInfo.URL
+	}
+
+	_id, _ := primitive.ObjectIDFromHex(jobID)
+	filter := bson.M{"_id": _id}
+	update := bson.M{"$set": updateJobListing}
+
+	result := jobCollection.FindOneAndUpdate(ctx, filter, update,
+		options.FindOneAndUpdate().SetReturnDocument(1))
+
+	var jobListing model.JobListing
+	if err := result.Decode(&jobListing); err != nil {
+		log.Fatal(err)
+	}
+
+	return &jobListing
 }
 
 func (db *DB) DeleteJobListing(jobID string) *model.DeleteJobListingResponse {
+	jobCollection := db.client.Database("graphql-job-board").Collection("job")
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+
+	_id, _ := primitive.ObjectIDFromHex(jobID)
+	filter := bson.M{"_id": _id}
+
+	_, err := jobCollection.DeleteOne(ctx, filter)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	return &model.DeleteJobListingResponse{DeleteJobID: jobID}
 }
