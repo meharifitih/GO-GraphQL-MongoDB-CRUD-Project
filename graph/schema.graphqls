@@ -18,7 +18,7 @@ type Query {
 type Mutation {
   createJobListing(input: CreateJobListingInput!): JobListing!
   updateJobListing(id: ID!, input: UpdateJobListingInput!): JobListing!
-  deleteJobListing(id: ID!): DeleteJoblistingResponse!
+  deleteJobListing(id: ID!): DeleteJobListingResponse!
 }
 
 input CreateJobListingInput {
@@ -34,6 +34,6 @@ input UpdateJobListingInput {
   url: String
 }
 
-type DeleteJoblistingResponse {
+type DeleteJobListingResponse {
   deleteJobId: String!
 }

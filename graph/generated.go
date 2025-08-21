@@ -47,7 +47,7 @@ type DirectiveRoot struct {
 }
 
 type ComplexityRoot struct {
-	DeleteJoblistingResponse struct {
+	DeleteJobListingResponse struct {
 		DeleteJobID func(childComplexity int) int
 	}
 
@@ -74,7 +74,7 @@ type ComplexityRoot struct {
 type MutationResolver interface {
 	CreateJobListing(ctx context.Context, input model.CreateJobListingInput) (*model.JobListing, error)
 	UpdateJobListing(ctx context.Context, id string, input model.UpdateJobListingInput) (*model.JobListing, error)
-	DeleteJobListing(ctx context.Context, id string) (*model.DeleteJoblistingResponse, error)
+	DeleteJobListing(ctx context.Context, id string) (*model.DeleteJobListingResponse, error)
 }
 type QueryResolver interface {
 	Jobs(ctx context.Context) ([]*model.JobListing, error)
@@ -100,12 +100,12 @@ func (e *executableSchema) Complexity(ctx context.Context, typeName, field strin
 	_ = ec
 	switch typeName + "." + field {
 
-	case "DeleteJoblistingResponse.deleteJobId":
-		if e.complexity.DeleteJoblistingResponse.DeleteJobID == nil {
+	case "DeleteJobListingResponse.deleteJobId":
+		if e.complexity.DeleteJobListingResponse.DeleteJobID == nil {
 			break
 		}
 
-		return e.complexity.DeleteJoblistingResponse.DeleteJobID(childComplexity), true
+		return e.complexity.DeleteJobListingResponse.DeleteJobID(childComplexity), true
 
 	case "JobListing.company":
 		if e.complexity.JobListing.Company == nil {
@@ -435,8 +435,8 @@ func (ec *executionContext) field___Type_fields_args(ctx context.Context, rawArg
 
 // region    **************************** field.gotpl *****************************
 
-func (ec *executionContext) _DeleteJoblistingResponse_deleteJobId(ctx context.Context, field graphql.CollectedField, obj *model.DeleteJoblistingResponse) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_DeleteJoblistingResponse_deleteJobId(ctx, field)
+func (ec *executionContext) _DeleteJobListingResponse_deleteJobId(ctx context.Context, field graphql.CollectedField, obj *model.DeleteJobListingResponse) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteJobListingResponse_deleteJobId(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -466,9 +466,9 @@ func (ec *executionContext) _DeleteJoblistingResponse_deleteJobId(ctx context.Co
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_DeleteJoblistingResponse_deleteJobId(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_DeleteJobListingResponse_deleteJobId(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
-		Object:     "DeleteJoblistingResponse",
+		Object:     "DeleteJobListingResponse",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
@@ -859,9 +859,9 @@ func (ec *executionContext) _Mutation_deleteJobListing(ctx context.Context, fiel
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*model.DeleteJoblistingResponse)
+	res := resTmp.(*model.DeleteJobListingResponse)
 	fc.Result = res
-	return ec.marshalNDeleteJoblistingResponse2ᚖgithubᚗcomᚋmeharifitiᚋgraphQLᚑgoᚋgraphᚋmodelᚐDeleteJoblistingResponse(ctx, field.Selections, res)
+	return ec.marshalNDeleteJobListingResponse2ᚖgithubᚗcomᚋmeharifitiᚋgraphQLᚑgoᚋgraphᚋmodelᚐDeleteJobListingResponse(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_Mutation_deleteJobListing(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -873,9 +873,9 @@ func (ec *executionContext) fieldContext_Mutation_deleteJobListing(ctx context.C
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			switch field.Name {
 			case "deleteJobId":
-				return ec.fieldContext_DeleteJoblistingResponse_deleteJobId(ctx, field)
+				return ec.fieldContext_DeleteJobListingResponse_deleteJobId(ctx, field)
 			}
-			return nil, fmt.Errorf("no field named %q was found under type DeleteJoblistingResponse", field.Name)
+			return nil, fmt.Errorf("no field named %q was found under type DeleteJobListingResponse", field.Name)
 		},
 	}
 	defer func() {
@@ -3194,19 +3194,19 @@ func (ec *executionContext) unmarshalInputUpdateJobListingInput(ctx context.Cont
 
 // region    **************************** object.gotpl ****************************
 
-var deleteJoblistingResponseImplementors = []string{"DeleteJoblistingResponse"}
+var deleteJobListingResponseImplementors = []string{"DeleteJobListingResponse"}
 
-func (ec *executionContext) _DeleteJoblistingResponse(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteJoblistingResponse) graphql.Marshaler {
-	fields := graphql.CollectFields(ec.OperationContext, sel, deleteJoblistingResponseImplementors)
+func (ec *executionContext) _DeleteJobListingResponse(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteJobListingResponse) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteJobListingResponseImplementors)
 
 	out := graphql.NewFieldSet(fields)
 	deferred := make(map[string]*graphql.FieldSet)
 	for i, field := range fields {
 		switch field.Name {
 		case "__typename":
-			out.Values[i] = graphql.MarshalString("DeleteJoblistingResponse")
+			out.Values[i] = graphql.MarshalString("DeleteJobListingResponse")
 		case "deleteJobId":
-			out.Values[i] = ec._DeleteJoblistingResponse_deleteJobId(ctx, field, obj)
+			out.Values[i] = ec._DeleteJobListingResponse_deleteJobId(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
@@ -3805,18 +3805,18 @@ func (ec *executionContext) unmarshalNCreateJobListingInput2githubᚗcomᚋmehar
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalNDeleteJoblistingResponse2githubᚗcomᚋmeharifitiᚋgraphQLᚑgoᚋgraphᚋmodelᚐDeleteJoblistingResponse(ctx context.Context, sel ast.SelectionSet, v model.DeleteJoblistingResponse) graphql.Marshaler {
-	return ec._DeleteJoblistingResponse(ctx, sel, &v)
+func (ec *executionContext) marshalNDeleteJobListingResponse2githubᚗcomᚋmeharifitiᚋgraphQLᚑgoᚋgraphᚋmodelᚐDeleteJobListingResponse(ctx context.Context, sel ast.SelectionSet, v model.DeleteJobListingResponse) graphql.Marshaler {
+	return ec._DeleteJobListingResponse(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNDeleteJoblistingResponse2ᚖgithubᚗcomᚋmeharifitiᚋgraphQLᚑgoᚋgraphᚋmodelᚐDeleteJoblistingResponse(ctx context.Context, sel ast.SelectionSet, v *model.DeleteJoblistingResponse) graphql.Marshaler {
+func (ec *executionContext) marshalNDeleteJobListingResponse2ᚖgithubᚗcomᚋmeharifitiᚋgraphQLᚑgoᚋgraphᚋmodelᚐDeleteJobListingResponse(ctx context.Context, sel ast.SelectionSet, v *model.DeleteJobListingResponse) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
 		}
 		return graphql.Null
 	}
-	return ec._DeleteJoblistingResponse(ctx, sel, v)
+	return ec._DeleteJobListingResponse(ctx, sel, v)
 }
 
 func (ec *executionContext) unmarshalNID2string(ctx context.Context, v any) (string, error) {

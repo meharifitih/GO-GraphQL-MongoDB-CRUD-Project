@@ -9,7 +9,7 @@ type CreateJobListingInput struct {
 	URL         string `json:"url"`
 }
 
-type DeleteJoblistingResponse struct {
+type DeleteJobListingResponse struct {
 	DeleteJobID string `json:"deleteJobId"`
 }
 
