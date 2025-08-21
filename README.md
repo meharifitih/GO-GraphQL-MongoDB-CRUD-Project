@@ -19,12 +19,13 @@ Welcome! This project demonstrates a full-stack CRUD API using Go, GraphQL (gqlg
 ### 1. Project Setup
 
 ```sh
-# Create a new folder for your project
-mkdir gql-yt
-cd gql-yt
 
-# Initialize a Go module (use your own module path)
-go mod init github.com/yourusername/gql-yt
+# Clone this repository and enter the project directory
+git clone https://github.com/meharifitih/GO-GraphQL-MongoDB-CRUD-Project.git
+cd GO-GraphQL-MongoDB-CRUD-Project
+
+# Initialize a Go module (if not already initialized)
+go mod init github.com/meharifitih/GO-GraphQL-MongoDB-CRUD-Project
 
 # Install gqlgen
 go get github.com/99designs/gqlgen
