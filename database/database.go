@@ -39,8 +39,8 @@ func Connect() *DB {
 }
 
 func (db *DB) GetJob(id string) *model.JobListing {
-	jobCollection := db.client.Database("graphql-job-board").Collection("jobs")
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second*30)
+	jobCollection := db.client.Database("graphql-job-board").Collection("job")
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 
 	_id, _ := primitive.ObjectIDFromHex(id)
