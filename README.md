@@ -168,9 +168,3 @@ mutation DeleteQuery($id: ID!) {
 
 ---
 
-## 📺 Video Tutorial
-Check out the full walkthrough on YouTube: [Golang GraphQL MongoDB CRUD Project](#) *(insert your video link here)*
-
----
-
-Feel free to fork, modify, and extend this project for your own needs!
